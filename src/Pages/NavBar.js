@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { getCurrentUser } from "../Service/UserService";
-
+import { isLoggedIn } from "../Service/UserService";
 export const NavBar=()=>{
 
     const navigate=useNavigate();
@@ -8,7 +8,22 @@ export const NavBar=()=>{
         localStorage.removeItem("data");
             navigate('/login');
     }
+    const doLogin=()=>{
+
+      navigate('/login');
+      console.log("in login page");
+    }
     const user=getCurrentUser()||"UserNot LogedIn";
+
+    const isLoggedIn = () => {
+      let data = localStorage.getItem("data");
+      if (data != null) {
+    
+        return true;
+      } else {
+        return false;
+      }
+    };
 
     return(
             <>
@@ -21,15 +36,20 @@ export const NavBar=()=>{
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="#">Home</a>
-      <a class="nav-item nav-link" href="#">Inventory</a>
-      <a class="nav-item nav-link" href="#">Your Transactions</a>
-      <a class="nav-item nav-link disabled" href="#"></a>
+      <a class="nav-item nav-link active" href="/">Home</a>
+      <a class="nav-item nav-link active" href="#">Your Transactions</a>
+      <a class="nav-item nav-link active" href="#">Admin Login</a>
+      <a class="nav-item nav-link active" href="/login">User Login</a>
     </div>
   </div>
   <nav>
     <p>{user.name||'User Not Logged In'}</p>
+    {isLoggedIn()?
     <button className="btn btn-warning" onClick={doLogout}>Logout</button>
+    :
+    <button className="btn btn-warning" onClick={doLogin}>Login</button>
+
+  }
   </nav>
 </nav>
             </>

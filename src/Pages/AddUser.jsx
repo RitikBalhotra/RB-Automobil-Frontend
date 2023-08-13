@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Link } from "react-router-dom";
-import { AddUserBackend, submitUser } from "../Service/UserService"
+import { submitUser } from "../Service/UserService"
 import { Login } from "./Login";
 
 export const AddUser=()=>{
