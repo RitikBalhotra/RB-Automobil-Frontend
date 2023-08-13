@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 export const DashBoard = () => {
   const [cars, setCars] = useState([]);
-  const [data, setData] = useState(false);
   const getDataFromBackend = () => {
     getAllCar()
       .then((resp) => {
