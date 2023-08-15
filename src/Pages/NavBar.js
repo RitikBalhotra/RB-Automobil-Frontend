@@ -18,7 +18,6 @@ export const NavBar=()=>{
     const isLoggedIn = () => {
       let data = localStorage.getItem("data");
       if (data != null) {
-    
         return true;
       } else {
         return false;
@@ -38,8 +37,8 @@ export const NavBar=()=>{
     <div class="navbar-nav">
       <a class="nav-item nav-link active" href="/">Home</a>
       <a class="nav-item nav-link active" href="#">Your Transactions</a>
-      <a class="nav-item nav-link active" href="#">Admin Login</a>
-      <a class="nav-item nav-link active" href="/login">User Login</a>
+     <a class="nav-item nav-link active" href="/AdminDashboard">Admin</a>
+     {/* <a class="nav-item nav-link active" href="/login">User Login</a> */}
     </div>
   </div>
   <nav>

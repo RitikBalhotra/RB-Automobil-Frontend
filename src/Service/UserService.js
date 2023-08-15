@@ -47,7 +47,7 @@ export const getUserByEmail = (email) => {
     .catch((error) => console.log(error));
 };
 
-
+// get All Users
 export const getAllUser=()=>
 {
   return myAxios
@@ -55,4 +55,27 @@ export const getAllUser=()=>
   .then((resp) => resp.data)
   .catch((error) => console.log(error));
 
+};
+
+//Delete USer 
+export const deleteUsr=(id)=>
+{
+  return myAxios.delete(`u1/delete/User/${id}`)
+  .then((resp)=> console.log(resp))
+  .catch((error)=> console.log(error));
+};
+
+//get User By Id
+export const getUserById=(id)=>
+{
+  return myAxios.get("/u1/getById/"+id)
+  .then((resp)=> resp.data)
+  .catch((error)=>console.log(error));
+}
+
+//Update User
+export const UpdateUser= (data)=>{
+        return myAxios.put("/u1/update/User", data)
+        .then((resp)=> resp.data)
+        .catch((error)=> error);
 }

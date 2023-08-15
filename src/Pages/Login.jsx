@@ -16,7 +16,7 @@ export const Login = () => {
     event.preventDefault();
     loginUser(user)
       .then((resp) => {
-        console.log(resp);
+        // console.log(resp);
         if (
           resp.email === 'ritikpotter07@gmail.com' &&
           resp.pass === 'ritik@07'

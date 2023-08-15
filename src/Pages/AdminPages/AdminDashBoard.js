@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 import { getAllTransaction } from "../../Service/TransactionService";
 import { getAllCar } from "../../Service/CarService";
 import { getAllUser } from "../../Service/UserService";
+import { naviGate, useNavigate } from "react-router-dom";
+
 export const AdminDashboard = () => {
+    const naviGate = useNavigate();
   const [transactions, setTransactions] = useState([]);
   const[cars,setCars]=useState([]);
   const[users,setUsers]=useState([]);
@@ -35,22 +38,22 @@ export const AdminDashboard = () => {
 
 
   useEffect(() => {
-    // if (checkLogedIn() === "true") {
-        checkLogedIn();
+    if (checkLogedIn()=== true){
+    //   checkLogedIn();
       getTransactionsFromBackend();
       getCarsFromBackend();
       getUsersFromBackend();
-
-     
-    // } else {
-    //   alert("Please Login first");
-    //   console.log("Please Login first");
-    // }
+    } else {
+      naviGate("/login");
+      localStorage.removeItem("data")
+      alert("Please Login first");
+    }
   }, []);
 
   const checkLogedIn = () => {
     const data = localStorage.getItem("data");
-    if (data != null) {
+    if (data.email === 'ritikpotter07@gmail.com' &&
+    data.pass === 'ritik@07') {
       return true;
     } else {
       return false;
@@ -65,7 +68,7 @@ export const AdminDashboard = () => {
             <div class="card-body">
               <h3 class="card-title">Cars</h3>
               <p class="card-text">Available cars:{cars.length}</p>
-              <a href="#" class="btn btn-primary">
+              <a href="/AdminCarDashboard" class="btn btn-primary">
                 Check Cars
               </a>
             </div>
@@ -76,7 +79,7 @@ export const AdminDashboard = () => {
             <div class="card-body">
               <h3 class="card-title">Users</h3>
               <p class="card-text">Available Users:{users.length}</p>
-              <a href="#" class="btn btn-primary">
+              <a href="/AdminUserDashboard" class="btn btn-primary">
                 Check Users
               </a>
             </div>
@@ -92,7 +95,7 @@ export const AdminDashboard = () => {
               </button>
             }
 
-            <table className="table">
+            <table className="table table-striped">
               <thead className="thead-dark">
                 <tr className="">
                   <th>Transaction_Id</th>
@@ -104,7 +107,7 @@ export const AdminDashboard = () => {
                 </tr>
               </thead>
 
-              <tbody className="table-striped table-borderd">
+              <tbody className="table table-borderd">
                 {transactions.map((transaction) => (
                   <tr>
                     <td>{transaction.id}</td>
@@ -114,13 +117,13 @@ export const AdminDashboard = () => {
                     <td>{transaction.car_price}</td>
 
                     <td>
-                      <button className="btn btn-danger ms-4 col-md-5 btn-sm">
-                        Delete
+                      <button className="btn btn-success ms-4 col-md-5 btn-sm">
+                        Accept
                       </button>
 
-                      <Link className="btn btn-success btn-sm ms-2 col-md-5">
+                      <Link className="btn btn-danger btn-sm ms-2 col-md-5">
                         {" "}
-                        Edit
+                        Reject
                       </Link>
                     </td>
                   </tr>

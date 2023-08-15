@@ -1,73 +1,60 @@
 import React, { useEffect, useState } from "react";
-import { addCar } from "../../Service/CarService";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { UpdateCar, getCarById } from "../../Service/CarService";
 
-export const AddCar = () => {
-  const [image, setImage] = useState({});
-  const [car, setCar] = useState({
-    name: "",
-    price: "",
-    model: "",
-    colour: "",
-    image: null,
-  });
-  const handelChange = (event, params) => {
-    event.preventDefault();
-    setCar({ ...car, [params]: event.target.value });
-  };
-  const handelChangeImage = (event) => {
-    event.preventDefault();
-    let ImageData = new FormData();
-    let file = event.target.files[0];
-    ImageData.append("image", file);
-    setCar({ ...car, image: file });
-    setImage(file);
-  };
 
-  const navigate=useNavigate();
-  const OnSubmit = (event) => {
-    event.preventDefault();
-
-    if(checkLogedIn()==="true")
-    {
-      addCar(car)
-      .then((resp) => {
-        console.log(resp);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-    }
-    else{
-      navigate('/AdminDashboard');
-    }
+export const  EditCar=()=>
+{
+    const navigate=useNavigate();
+    const[car,setCar]=useState({
+        id:"",
+        name:"",
+        model:"",
+        price:"",
+        price:""
+    })
+    const handelChange=(e,props)=>{
+        setCar({...car, [props]: e.target.value});
+      }
+      const id = useParams();
+      const eid = id.id;
     
-  };
+      useEffect(() => {
+        getCarById(eid)
+          .then((resp) => setCar(resp))
+          .catch((error) => {});
+      }, {});
+    
+     
+      const SubmitData=(event)=>
+      {
+        event.preventDefault();
+        UpdateCar(car)
+        .then((resp)=>{
+            navigate("/AdminCarDashboard");
+        })
+        .catch((error)=>{
+            alert("Something went wrong");
+        })
 
-  const checkLogedIn = () => {
-    const data = localStorage.getItem("data");
-    if (data != null) {
-      return true;
-    } else {
-      console.log("Please Login First");
-      return false;
-    }
-  };
+    };
+    
 
-  return (
-    <>
-      <div className="d-flex justify-content-center align-item-center mt-4">
+
+
+    return(
+        <>
+        <div className="d-flex justify-content-center align-item-center mt-4">
         <div className="conatiner col-md-9">
-          <form onSubmit={OnSubmit} className="form-control">
+          <form onSubmit={SubmitData} className="form-control">
             <div className="mb-1">
               <label htmlFor="Car Name">Image</label>
               <input
                 className="form-control"
                 type="file"
                 accept="image/*"
-                required
                 name="image"
-                onChange={handelChangeImage}
+                value={car.image_name}
               />
             </div>
             <div className="mb-1">
@@ -75,7 +62,7 @@ export const AddCar = () => {
               <input
                 className="form-control"
                 type="text"
-                required
+                id=""
                 name="name"
                 onChange={(e) => handelChange(e, "name")}
                 value={car.name}
@@ -86,7 +73,7 @@ export const AddCar = () => {
               <input
                 className="form-control"
                 type="number"
-                required
+                id=""
                 name="model"
                 onChange={(e) => handelChange(e, "model")}
                 value={car.model}
@@ -97,7 +84,7 @@ export const AddCar = () => {
               <input
                 type="text"
                 className="form-control"
-                required
+                id=""
                 name="colour"
                 onChange={(e) => handelChange(e, "colour")}
                 value={car.colour}
@@ -108,7 +95,7 @@ export const AddCar = () => {
               <input
                 className="form-control"
                 type="number"
-                required
+                id=""
                 name="price"
                 onChange={(e) => handelChange(e, "price")}
                 value={car.price}
@@ -131,6 +118,7 @@ export const AddCar = () => {
           </form>
         </div>
       </div>
-    </>
-  );
-};
+        
+        </>
+    )
+}
