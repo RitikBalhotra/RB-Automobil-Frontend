@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { getAllUser, deleteUsr, getUserById } from "../../Service/UserService";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 export const AdminUserDashboard = () => {
+  const navigate=useNavigate();
   const [users, setusers] = useState([]);
 
   const getUserFrombackend = () => {
@@ -22,7 +23,8 @@ export const AdminUserDashboard = () => {
   const deleteUsers = (id) => {
     deleteUsr(id)
       .then((resp) => {
-        console.log("User deleted Successfully");
+        alert("Deleted Successfully!")
+        navigate("")
       })
       .catch((error) => console.log("Something Went Wrong"));
   };

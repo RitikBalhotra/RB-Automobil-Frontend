@@ -2,8 +2,9 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { deleteCar, getAllCar } from "../../Service/CarService";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 export const AdminCarDashboard = () => {
+  const navigate=useNavigate();
   const [cars, setCars] = useState([]);
   const getDataFromBackend = () => {
     getAllCar()
@@ -32,8 +33,11 @@ export const AdminCarDashboard = () => {
  //Delete Car 
  const deleteCars=(id)=>{
   deleteCar(id)
-  .then((resp)=>
-  console.log("Deleted Car Successfully"))
+  .then((resp)=>{
+  alert("Delete Car Successfully!")
+  navigate("")
+ })
+  
   .catch((error)=>
   console.log("Something Went wrong"));
  }

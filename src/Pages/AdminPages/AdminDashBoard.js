@@ -45,15 +45,13 @@ export const AdminDashboard = () => {
       getUsersFromBackend();
     } else {
       naviGate("/login");
-      localStorage.removeItem("data")
       alert("Please Login first");
     }
   }, []);
 
   const checkLogedIn = () => {
     const data = localStorage.getItem("data");
-    if (data.email === 'ritikpotter07@gmail.com' &&
-    data.pass === 'ritik@07') {
+    if (data!=null) {
       return true;
     } else {
       return false;
