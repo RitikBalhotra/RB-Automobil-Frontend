@@ -9,7 +9,8 @@ export const DashBoard = () => {
       .then((resp) => {
         setCars(resp);
       })
-      .catch((error) => {});
+      .catch((error) => 
+      console.log("Error"));
   }
   useEffect(() => {
     checkLogedIn();
@@ -37,7 +38,7 @@ export const DashBoard = () => {
             <div className="card">
               {console.log(car.imageName)}
               <img
-                src={"https://localhost:8082/api/c1/"+car.imageName}
+                src={"https://localhost:8082/api/c1/image/"+car.imageName}
                 height={100}
                 width={100}
                 className="card-img-top"

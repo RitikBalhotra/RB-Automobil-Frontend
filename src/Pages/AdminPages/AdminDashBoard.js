@@ -87,7 +87,7 @@ export const AdminDashboard = () => {
         <div className="myCustomTable mt-2">
           <div className="card">
             {
-              <button className="btn btn-primary ms-5 mt-2 col-md-2 btn-sm">
+              <button className="btn btn-primary ms-3 mt-2 col-md-2 btn-sm">
                 {""}
                 Total Transactions:{transactions.length}
               </button>

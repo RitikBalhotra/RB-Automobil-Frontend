@@ -9,9 +9,8 @@ export const NavBar=()=>{
             navigate('/login');
     }
     const doLogin=()=>{
-
       navigate('/login');
-      console.log("in login page");
+      // console.log("in login page");
     }
     const user=getCurrentUser()||"UserNot LogedIn";
 

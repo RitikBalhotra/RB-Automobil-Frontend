@@ -26,14 +26,13 @@ export const Login = () => {
           localStorage.setItem("data", JSON.stringify(resp));
         }
         else{
-          navigate("/");
-          localStorage.setItem("data", JSON.stringify(resp));
+          alert("Please Sign up First");
+          navigate("/login");
         }
-       
-        
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error,);
+        console.log("Please login First");
       });
   };
   return (
