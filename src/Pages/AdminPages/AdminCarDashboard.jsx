@@ -1,8 +1,9 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import * as React from "react";
+import { useEffect, useState   } from "react";
 import { deleteCar, getAllCar } from "../../Service/CarService";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 export const AdminCarDashboard = () => {
   const navigate=useNavigate();
   const [cars, setCars] = useState([]);
@@ -18,8 +19,9 @@ export const AdminCarDashboard = () => {
   useEffect(() => {
     checkLogedIn();
     getDataFromBackend();
-  }, []);
+  }, [getAllCar]);
 
+ 
   //Check loged In
   const checkLogedIn = () => {
     const data = localStorage.getItem("data");
@@ -34,7 +36,9 @@ export const AdminCarDashboard = () => {
  const deleteCars=(id)=>{
   deleteCar(id)
   .then((resp)=>{
-  alert("Delete Car Successfully!")
+    toast('Car Deleted  Successfully!')
+    getDataFromBackend();
+  
   navigate("")
  })
   
@@ -55,16 +59,10 @@ export const AdminCarDashboard = () => {
         </div>
       <div className="row row-cols-3 g-3">
         {cars.map((car) => (
-          <div className="col" key={car.id}>
+          <div className="col bg-danger" key={car.id}>
             <div className="card">
-              {console.log(car.imageName)}
-              <img
-                src={"https://localhost:8082/api/c1/" + car.imageName}
-                height={100}
-                width={100}
-                className="card-img-top"
-                alt="Hollywood Sign on The Hill"
-              ></img>
+            <div className="card-header" style={{height:'250px',}}>
+                <img src={"http://localhost:8082/api/c1/image/" + car.imageName} style={{width: '100%', height:'100%'}} ></img></div>
               <div className="card-body bg-info ">
                 <h3 className="card-title text-danger">{car.name}</h3>
                 <h5 className="text text-black font-weight-bolder ">
@@ -88,6 +86,13 @@ export const AdminCarDashboard = () => {
           </div>
         ))}
       </div>
+      <footer class="bg-dark text-center text-white">
+
+  <div class="text-center">
+    © 2023 Copyright :
+    RB-Automobile
+  </div>
+</footer>
     </>
   );
 };

@@ -26,20 +26,22 @@ export const Login = () => {
           localStorage.setItem("data", JSON.stringify(resp));
         }
         else{
-          alert("Please Sign up First");
-          navigate("/login");
+          navigate("/");
+          localStorage.setItem("data", JSON.stringify(resp));
         }
+        
       })
       .catch((error) => {
         console.log(error,);
-        console.log("Please login First");
+        alert("Please sign up First");
       });
   };
   return (
     <>
-      <div className="d-flex justify-content-center align-item-center mt-5">
-        <div className="card shadow col-md-6">
-          <div className="card-header">
+    <div className="box  bg-danger">
+      <div className="d-flex justify-content-center align-item-center bg-danger">
+        <div className="card shadow col-md-6 bg-warning">
+          <div className="card-header bg-black text-white ">
             <div className="text-center">
               {" "}
               <p className="fs-3 fw-bolder">Login here</p>{" "}
@@ -76,7 +78,7 @@ export const Login = () => {
                 don't have an Account{" "}
                 <span>
                   {" "}
-                  <Link to={"/addUser"}>Sign-Up here</Link>
+                  <Link to={"/addUser"} className="signup text-ifo">Sign-Up here</Link>
                 </span>
               </div>
               <div className="text-center mt-3">
@@ -86,6 +88,22 @@ export const Login = () => {
           </div>
         </div>
       </div>
+       <br />
+       <br />
+       <br /><br /><br /></div>
+       
+
+
+  <footer class="bg-dark text-center text-white">
+
+  <div class="text-center">
+    © 2023 Copyright :
+    RB-Automobile
+  </div>
+</footer>
+  
+
+
     </>
   );
 };

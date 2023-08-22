@@ -2,49 +2,43 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { UpdateCar, getCarById } from "../../Service/CarService";
 
+export const EditCar = () => {
+  const navigate = useNavigate();
+  const [car, setCar] = useState({
+    id: "",
+    name: "",
+    model: "",
+    price: "",
+    price: "",
+  });
+  const handelChange = (e, props) => {
+    setCar({ ...car, [props]: e.target.value });
+  };
+  const id = useParams();
+  const eid = id.id;
 
-export const  EditCar=()=>
-{
-    const navigate=useNavigate();
-    const[car,setCar]=useState({
-        id:"",
-        name:"",
-        model:"",
-        price:"",
-        price:""
-    })
-    const handelChange=(e,props)=>{
-        setCar({...car, [props]: e.target.value});
-      }
-      const id = useParams();
-      const eid = id.id;
-    
-      useEffect(() => {
-        getCarById(eid)
-          .then((resp) => setCar(resp))
-          .catch((error) => {});
-      }, {});
-    
-     
-      const SubmitData=(event)=>
-      {
-        event.preventDefault();
-        UpdateCar(car)
-        .then((resp)=>{
-            navigate("/AdminCarDashboard");
-        })
-        .catch((error)=>{
-            alert("Something went wrong");
-        })
+  useEffect(() => {
+    getCarById(eid)
+      .then((resp) => setCar(resp))
+      .catch((error) => {});
+  }, {});
 
-    };
-    
+  const SubmitData = (event) => {
+    event.preventDefault();
+    UpdateCar(car)
+      .then((resp) => {
+        navigate("/AdminCarDashboard");
+      })
+      .catch((error) => {
+        alert("Something went wrong");
+      });
+  };
 
-
-
-    return(
-        <>
-        <div className="d-flex justify-content-center align-item-center mt-4">
+  return (
+    <>
+    <div className="blanl bg-danger">
+      <br />
+      <div className="d-flex justify-content-center align-item-center ">
         <div className="conatiner col-md-9">
           <form onSubmit={SubmitData} className="form-control">
             <div className="mb-1">
@@ -118,7 +112,14 @@ export const  EditCar=()=>
           </form>
         </div>
       </div>
-        
-        </>
-    )
-}
+      <div>
+        <br />
+        <br />
+      </div>
+      </div>
+      <footer class="bg-dark text-center text-white">
+        <div class="text-center">© 2023 Copyright : RB-Automobile</div>
+      </footer>
+    </>
+  );
+};

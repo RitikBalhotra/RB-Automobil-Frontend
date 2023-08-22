@@ -13,6 +13,9 @@ import { AdminCarDashboard } from './Pages/AdminPages/AdminCarDashboard';
 import { AdminUserDashboard } from './Pages/AdminPages/AdminUserDashboard';
 import { EditUser } from './Pages/AdminPages/EditUser';
 import { EditCar } from './Pages/AdminPages/EditCars';
+import { Toaster } from 'react-hot-toast';
+import { AcceptTransactions } from './Pages/AdminPages/AcceptTransaction';
+import { RejectTransactions } from './Pages/AdminPages/RejectTransaction';
 
 
 function App() {
@@ -30,10 +33,12 @@ function App() {
       <Route path='/AdminUserDashboard' element={<AdminUserDashboard/>}/>
       <Route path="/EditUser/:id" element={<EditUser/>}/>
       <Route path="/EditCar/:id" element={<EditCar/>}/>
+      <Route path="/AcceptTransaction" element={<AcceptTransactions/>}/>
+      <Route path="/RejectTransaction" element={<RejectTransactions/>}/>
 
       
     </Routes>
-   
+    <Toaster />
     
     </>
   );

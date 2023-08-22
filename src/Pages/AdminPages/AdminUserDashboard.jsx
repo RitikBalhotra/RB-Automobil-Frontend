@@ -3,7 +3,7 @@ import { getAllUser, deleteUsr, getUserById } from "../../Service/UserService";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 export const AdminUserDashboard = () => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const [users, setusers] = useState([]);
 
   const getUserFrombackend = () => {
@@ -23,16 +23,17 @@ export const AdminUserDashboard = () => {
   const deleteUsers = (id) => {
     deleteUsr(id)
       .then((resp) => {
-        alert("Deleted Successfully!")
-        navigate("")
+        alert("Deleted Successfully!");
+        navigate("");
       })
       .catch((error) => console.log("Something Went Wrong"));
   };
 
-  
   return (
     <>
-      <div className="myCustomTable mt-2">
+    <div className="blank bg-danger">
+      <br />
+      <div className="myCustomTable  bg-danger">
         <div className="card">
           {
             <button className="btn btn-primary ms-5 mt-2 col-md-2 btn-sm">
@@ -67,9 +68,11 @@ export const AdminUserDashboard = () => {
                     >
                       Delete
                     </button>
-                    
 
-                    <Link to={`/EditUser/${user.id}`} className="btn btn-danger btn-sm ms-2 col-md-5">
+                    <Link
+                      to={`/EditUser/${user.id}`}
+                      className="btn btn-danger btn-sm ms-2 col-md-5"
+                    >
                       Edit
                     </Link>
                   </td>
@@ -79,6 +82,20 @@ export const AdminUserDashboard = () => {
           </table>
         </div>
       </div>
+      </div>
+      <div className="blank bg-danger">
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        
+        <br />
+      </div>
+      <footer class="bg-dark text-center text-white">
+        <div class="text-center">© 2023 Copyright : RB-Automobile</div>
+      </footer>
     </>
   );
 };

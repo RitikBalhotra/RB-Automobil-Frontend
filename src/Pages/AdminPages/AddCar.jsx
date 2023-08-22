@@ -28,11 +28,13 @@ export const AddCar = () => {
   const OnSubmit = (event) => {
     event.preventDefault();
 
-    if(checkLogedIn()==="true")
+    if(checkLogedIn()=== true)
     {
       addCar(car)
       .then((resp) => {
         console.log(resp);
+        console.log("Data submit Successfully");
+        // alert("Data Submit")
       })
       .catch((error) => {
         console.log(error);
@@ -56,7 +58,9 @@ export const AddCar = () => {
 
   return (
     <>
-      <div className="d-flex justify-content-center align-item-center mt-4">
+    <div className="blank bg-danger">
+      <br />
+      <div className="d-flex justify-content-center align-item-center">
         <div className="conatiner col-md-9">
           <form onSubmit={OnSubmit} className="form-control">
             <div className="mb-1">
@@ -130,7 +134,18 @@ export const AddCar = () => {
             </div>
           </form>
         </div>
+        
       </div>
+      <div className="blank bg-danger"><br />
+        <br /></div>
+        </div>
+      <footer class="bg-dark text-center text-white">
+
+  <div class="text-center">
+    © 2023 Copyright :
+    RB-Automobile
+  </div>
+</footer>
     </>
   );
 };
