@@ -38,8 +38,8 @@ export const Login = () => {
   };
   return (
     <>
-    <div className="box  bg-danger">
-      <div className="d-flex justify-content-center align-item-center bg-danger">
+    <div className="box " style={{backgroundImage:'url("images/Rubicon.jpeg")', backgroundSize:'1263px 450px' , backgroundRepeat:'no-repeat',height:'450px', width:'1263px'}}> <br />
+      <div className="d-flex justify-content-center  align-item-center ">
         <div className="card shadow col-md-6 bg-warning">
           <div className="card-header bg-black text-white ">
             <div className="text-center">
@@ -87,10 +87,8 @@ export const Login = () => {
             </form>
           </div>
         </div>
-      </div>
-       <br />
-       <br />
-       <br /><br /><br /></div>
+      </div> <br /> <br /> <br /> <br />
+       </div>
        
 
 

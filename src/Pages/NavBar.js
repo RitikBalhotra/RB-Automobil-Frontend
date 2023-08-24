@@ -25,7 +25,7 @@ export const NavBar=()=>{
 
     return(
             <>
-            <nav class="navbar navbar-expand-lg navbar-light bg-info">
+            <nav class="navbar navbar-expand-lg navbar-light " style={{backgroundColor:'#232959', color:'white'}}>
     <div className="logo"  >
   <a class="navbar-brand  bg-danger text-white" href="/">RB AUTOMOBILES</a>
   </div>
@@ -33,9 +33,9 @@ export const NavBar=()=>{
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="/">Home</a>
-      <a class="nav-item nav-link active" href="#">Your Transactions</a>
+    <div class="navbar-nav ">
+      <a class="nav-item nav-link  text-light active" href="/">Home</a>
+      <a class="nav-item nav-link text-light active" href="#">Your Transactions</a>
      <a class="nav-item nav-link active" href="#"></a>
      {/* <a class="nav-item nav-link active" href="/login">User Login</a> */}
     </div>

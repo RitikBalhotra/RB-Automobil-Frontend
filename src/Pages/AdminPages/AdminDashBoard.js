@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   deleteTransaction,
@@ -21,8 +21,8 @@ export const AdminDashboard = () => {
   const [tAccepts, setAccept] = useState([]);
   const [tReject, setReject] = useState([]);
   const [tStatus, setStatus] = useState({
-    id: "",
-    status: ""
+    id: 0,
+    status: "",
   });
 
   const getTransactionsFromBackend = () => {
@@ -36,7 +36,7 @@ export const AdminDashboard = () => {
   const getAcceptFromBackend = () => {
     getAllAccept()
       .then((resp) => {
-        console.log(resp);
+        // console.log(resp);
         setAccept(resp);
       })
       .catch((error) => {});
@@ -88,31 +88,25 @@ export const AdminDashboard = () => {
       return false;
     }
   };
-  const acceptReject = (props, args) => {
-    console.log("before set satus  :"  +props , args);
-    setStatus({
-      id: props,
-      status: args
-  });
-    console.log(tStatus);    
-    statusService(tStatus)
-      .then((resp) =>{
-       toast.success(args);
-       deleteTransaction(tStatus.id);
-       getAllTransaction();
-      })
-      .catch((error) => toast.warning("SomeThing Went Wrong"));
-      
+  const acceptReject = (id, status,e) => {
+ 
+    let data={
+      id:id,
+      status:status,
+    }
+    sendData(data);
   };
+  const sendData=useCallback((data)=>{
+   
+      statusService(data)
+        .then((resp) => {
+          toast.success(data.status)
+          getTransactionsFromBackend();
+        })
+        .catch((error) => toast.warning("SomeThing Went Wrong"));
+    
+  },[acceptReject])
 
-  
-
-  // const deleteActionTransction = (id) => {
-  //   deleteTransaction(tStatus.id)
-  //     .then((resp) => console.log("Data Deleted"))
-  //     .catch((error) => console.log(error));
-  //     getAllTransaction();
-  // };
   return (
     <>
       <div class="row">
@@ -196,13 +190,13 @@ export const AdminDashboard = () => {
                     <td>
                       <button
                         className="btn btn-success ms-4 col-md-3"
-                        onClick={(e) => acceptReject(transaction.id, "accept")}
+                        onClick={(e) => acceptReject(transaction.id, "accept",e)}
                       >
                         Accept
                       </button>
                       <button
                         className="btn btn-danger ms-4 col-md-3 "
-                        onClick={(e) => acceptReject(transaction.id, "reject")}
+                        onClick={(e) => acceptReject(transaction.id, "reject" ,e)}
                       >
                         Reject
                       </button>
